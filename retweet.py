@@ -55,7 +55,8 @@ def retweet():
     """
     実際にリツイートを行う関数
     """
-    for t in get_all_tweet_by_search():
+    ts = get_all_tweet_by_search() + api.user_timeline(screen_name='knpr_1draw', count=200)
+    for t in ts:
         # DBにあるものはスキップする
         if c.find({'_id': t.id}).count():
             continue
