@@ -8,17 +8,13 @@ from pymongo.mongo_client import MongoClient
 from get_tweepy import *
 
 def get_ignore_users():
-    """
-    ファイルからignore_usersを取得する
-    """
+    """ファイルからignore_usersを取得する。"""
     with open('ignores.yaml') as f:
         ignore_users = yaml.load(f)['ignore_users']
     return ignore_users
     
 def make_doc(t):
-    """
-    tweepy.Statusから、DBに記録するためのdictを作る
-    """
+    """tweepy.Statusから、DBに記録するためのdictを作る。"""
     doc = {
         '_id': t.id,
         'data': t._json,
@@ -31,9 +27,7 @@ def make_doc(t):
     return doc
 
 def is_right_tweet(t):
-    """
-    ツイートがRT対象かどうかを判定する述語
-    """
+    """ツイートがRT対象かどうかを判定する述語。"""
     if type(t) is dict:
         return \
             t['data']['user']['screen_name'] == 'knpr_1draw' \
@@ -52,15 +46,11 @@ def is_right_tweet(t):
             and t.user.screen_name not in ignore_users
 
 def get_all_tweet_by_search():
-    """
-    古い順に並べたツイートリストを返す
-    """
+    """古い順に並べたツイートリストを返す。"""
     return list(reversed(list(tweepy.Cursor(api.search, q='{tag} -RT'.format(tag=tag), count=200).items())))
 
 def retweet():
-    """
-    実際にリツイートを行う関数
-    """
+    """実際にリツイートを行う関数。"""
     ts = get_all_tweet_by_search() + api.user_timeline(screen_name='knpr_1draw', count=200)
     for t in ts:
         # DBにあるものはスキップする
