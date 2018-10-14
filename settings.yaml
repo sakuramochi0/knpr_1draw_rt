@@ -1,0 +1,10 @@
+kinpri:
+  main_screen_name: prism_1draw
+  rt_bot_screen_name: knpr_1draw_rt
+  tag: '#キンプリ深夜の真剣お絵かき60分一本勝負'
+  db_name: kinpri_1draw
+prism:
+  main_screen_name: prism_1draw
+  rt_bot_screen_name: prism_1draw_rt_
+  tag: '#プリリズ版深夜の真剣お絵描き60分'
+  db_name: prism_1draw
